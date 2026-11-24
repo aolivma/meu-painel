@@ -135,14 +135,14 @@ const layoutB = (title, sub, bullets, shotHtml) => `
   </style>
 `;
 
-const page = (body, extraCss = "") => `<!DOCTYPE html>
+const page = (body, extraCss = "", includeBrand = true) => `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
 <style>${baseCss}${extraCss}</style>
 </head>
 <body>
-<header class="brand"><img src="${icon}" alt="" />Meu Painel</header>
+${includeBrand ? `<header class="brand"><img src="${icon}" alt="" />Meu Painel</header>` : ""}
 ${body}
 </body>
 </html>`;
@@ -208,23 +208,140 @@ const configs = [
   },
 ];
 
+// Renderizado em 2x e reduzido para 440x280, para manter o texto nítido.
+const tileHtml = page(
+  `<div class="tile">
+    <img src="${icon}" alt="" />
+    <h1>Meu Painel</h1>
+    <p>Seus links favoritos na nova aba</p>
+  </div>`,
+  `
+  html, body { width: 880px; height: 560px; }
+  body { display: grid; place-items: center; }
+  .tile {
+    zoom: 2;
+    width: 440px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 28px;
+    text-align: center;
+  }
+  .tile img { width: 58px; height: 58px; border-radius: 15px; box-shadow: 0 14px 34px rgba(0, 0, 0, .5); }
+  .tile h1 { margin-top: 14px; font-size: 30px; letter-spacing: -0.02em; }
+  .tile p { margin-top: 5px; font-size: 14px; color: #8b93a7; }
+  `,
+  false
+);
+
+const marqueeHtml = page(
+  `<div class="content mq-main">
+    <div class="mq-copy">
+      <p class="eyebrow">Extensão para Google Chrome</p>
+      <h1>Sua nova aba,<br /><em>do seu jeito</em></h1>
+      <p class="sub">Todos os seus links favoritos em cards, organizados por categorias e com ícones automáticos.</p>
+      <div class="mq-pills">
+        <span class="pill">${check}Grátis e open source</span>
+        <span class="pill">${check}Sem cadastro</span>
+        <span class="pill">${check}Dados só no navegador</span>
+      </div>
+    </div>
+    <div class="mq-shot">
+      <figure class="frame"><img src="${img("02-painel.png")}" alt="" style="height:400px;width:auto" /></figure>
+    </div>
+  </div>`,
+  `
+  html, body { width: 1400px; height: 560px; }
+  .mq-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 600px;
+    align-items: center;
+    gap: 52px;
+    padding: 96px 60px 40px;
+  }
+  .eyebrow {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 5px 12px;
+    border: 1px solid #313848;
+    border-radius: 999px;
+    color: #8b93a7;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .mq-copy h1 { font-size: 52px; line-height: 1.05; }
+  .mq-copy h1 em { font-style: normal; color: #5b8cff; }
+  .mq-copy .sub { max-width: 520px; margin-top: 15px; font-size: 18px; }
+  .mq-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border: 1px solid #262b36;
+    border-radius: 999px;
+    background: rgba(23, 26, 33, .75);
+    color: #c6cbd8;
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+  .pill svg { color: #5b8cff; }
+  .mq-shot { position: relative; display: grid; place-items: center; }
+  .mq-shot::before {
+    content: "";
+    position: absolute;
+    width: 560px;
+    height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(91, 140, 255, .18), transparent 66%);
+  }
+  .mq-shot .frame { position: relative; }
+  `
+);
+
+const promos = [
+  {
+    file: "tile-440x280.png",
+    width: 880,
+    height: 560,
+    resizeTo: 440,
+    dir: join(root, "store-assets/promo"),
+    html: tileHtml,
+  },
+  {
+    file: "marquee-1400x560.png",
+    width: 1400,
+    height: 560,
+    dir: join(root, "store-assets/promo"),
+    html: marqueeHtml,
+  },
+];
+
 mkdirSync(outDir, { recursive: true });
 mkdirSync(tmpDir, { recursive: true });
+mkdirSync(join(root, "store-assets/promo"), { recursive: true });
 
-for (const config of configs) {
+for (const config of [...configs, ...promos]) {
   const htmlPath = join(tmpDir, config.file.replace(/\.png$/, ".html"));
   writeFileSync(htmlPath, config.html);
-  const output = join(outDir, config.file);
+  const output = join(config.dir || outDir, config.file);
   execFileSync(chrome, [
     "--headless=new",
     "--disable-gpu",
     "--hide-scrollbars",
     "--force-device-scale-factor=1",
-    "--window-size=1280,800",
+    `--window-size=${config.width || 1280},${config.height || 800}`,
     "--virtual-time-budget=3000",
     `--screenshot=${output}`,
     pathToFileURL(htmlPath).href,
   ], { stdio: "ignore" });
+  if (config.resizeTo) {
+    execFileSync("sips", ["--resampleWidth", String(config.resizeTo), output], { stdio: "ignore" });
+  }
   console.log("gerado:", output);
 }
 

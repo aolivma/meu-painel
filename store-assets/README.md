@@ -15,6 +15,16 @@ Materiais prontos para upload no Developer Dashboard.
 Todos em PNG 24 bits, sem transparência, 1280×800, abaixo de 300 KB — dentro dos
 requisitos da Chrome Web Store (1280×800 ou 640×400; até 5 imagens).
 
+## Imagens promocionais (opcionais)
+
+| Arquivo | Formato | Onde usar |
+| --- | --- | --- |
+| `promo/tile-440x280.png` | 440×280 PNG | “Small promo tile” na listagem |
+| `promo/marquee-1400x560.png` | 1400×560 PNG | “Marquee” na parte superior da loja |
+
+Ambas em PNG 24 bits, sem transparência. O tile é renderizado em 2× e reduzido para
+manter o texto nítido.
+
 ## Regenerar
 
 As imagens são montadas em HTML e capturadas pelo Chrome headless:
