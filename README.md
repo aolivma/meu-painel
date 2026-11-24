@@ -37,6 +37,7 @@ Extensão para Google Chrome (Manifest V3) que substitui a página de nova aba p
 | `docs/index.html` | Página inicial do site publicado |
 | `docs/icon128.png` | Ícone usado na página publicada |
 | `docs/assets/screenshots/` | Capturas reais da extensão usadas na página inicial |
+| `store-assets/screenshots/` | Imagens 1280×800 prontas para a Chrome Web Store |
 | `icons/` | Ícones da extensão |
 
 ## Privacidade
