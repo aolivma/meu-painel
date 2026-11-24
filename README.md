@@ -33,12 +33,13 @@ Extensão para Google Chrome (Manifest V3) que substitui a página de nova aba p
 | `popup.html` / `popup.js` / `popup.css` | Popup para adicionar o site atual |
 | `background.js` | Service worker e menu de contexto |
 | `store.js` | Camada de armazenamento local |
-| `privacy.html` | Política de privacidade |
+| `docs/privacy.html` | Política de privacidade (publicada no GitHub Pages) |
+| `docs/index.html` | Página inicial do site publicado |
 | `icons/` | Ícones da extensão |
 
 ## Privacidade
 
-A extensão não envia dados ao desenvolvedor. Títulos, URLs e preferências ficam armazenados apenas no seu navegador. Veja [privacy.html](privacy.html) ou a versão publicada em <https://aolivma.github.io/meu-painel/privacy.html>.
+A extensão não envia dados ao desenvolvedor. Títulos, URLs e preferências ficam armazenados apenas no seu navegador. Veja [docs/privacy.html](docs/privacy.html) ou a versão publicada em <https://aolivma.github.io/meu-painel/privacy.html>.
 
 ## Licença
 

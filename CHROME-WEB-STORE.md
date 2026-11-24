@@ -2,13 +2,13 @@
 
 Checklist e textos prontos para colar no Developer Dashboard, alinhados ao código atual
 (`manifest.json` 1.7.1, `popup.js`, `background.js`, `store.js`, `newtab.js`) e à política
-em [`privacy.html`](privacy.html).
+em [`docs/privacy.html`](docs/privacy.html).
 
 ---
 
 ## 1. Antes de publicar a política
 
-1. Contato já preenchido em `privacy.html` (blocos PT e EN): **Amanda Oliveira de Lima** /
+1. Contato já preenchido em `docs/privacy.html` (blocos PT e EN): **Amanda Oliveira de Lima** /
    **amandaoliveiradelima@gmail.com**. Se mudar, atualize os dois blocos.
 2. O `manifest.json` já aponta `homepage_url` para a URL real do projeto:
    `https://aolivma.github.io/meu-painel/` (mesma base onde a política é publicada).
@@ -22,7 +22,7 @@ em [`privacy.html`](privacy.html).
 
 | Opção | Como | URL típica |
 | --- | --- | --- |
-| **GitHub Pages** (recomendado) | Repositório público → Settings → Pages → Deploy from branch → `main` / `/ (root)` | `https://aolivma.github.io/meu-painel/privacy.html` |
+| **GitHub Pages** (recomendado) | Repositório público → Settings → Pages → Deploy from branch → `main` / `/docs` | `https://aolivma.github.io/meu-painel/privacy.html` |
 | **Netlify Drop** | Arraste uma pasta com `privacy.html` em <https://app.netlify.com/drop> | `https://nome-aleatorio.netlify.app/privacy.html` |
 | **Cloudflare Pages** | Upload direto ou conexão com o repositório | `https://projeto.pages.dev/privacy.html` |
 
@@ -144,7 +144,7 @@ parágrafo na descrição do item (além do texto normal de features):
 
 ## 6. Declaração de Uso Limitado
 
-Já está em `privacy.html` (seção 14). O texto exigido é:
+Já está em `docs/privacy.html` (seção 14). O texto exigido é:
 
 > “The use of information received from Google APIs will adhere to the Chrome Web Store User Data
 > Policy, including the Limited Use requirements.”
@@ -162,8 +162,8 @@ destacada na página da Chrome Web Store **e na interface do produto**. Isso foi
   salvar o link. Nada é enviado ao desenvolvedor.” (estilo `.privacy-note` em `popup.css`).
 - **`newtab.html`** — link “Política de privacidade” no rodapé do diálogo “Personalizar”
   (estilo `.settings-privacy` em `style.css`).
-- **`newtab.js`** — o link abre o `privacy.html` incluído na extensão. Para abrir a versão pública,
-  preencha a constante `PRIVACY_URL` com a mesma URL informada no dashboard.
+- **`newtab.js`** — o link abre a versão pública definida em `PRIVACY_URL`; se ela estiver vazia,
+  abre a cópia incluída na extensão (`docs/privacy.html`).
 
 Mantenha esse texto alinhado com a política: se o comportamento mudar, ajuste os dois.
 
@@ -199,10 +199,10 @@ Mantenha esse texto alinhado com a política: se o comportamento mudar, ajuste o
 
 ## 9. Checklist final
 
-- [ ] `privacy.html` publicado em URL pública e sem login
-- [x] Contato preenchido em `privacy.html` (Amanda Oliveira de Lima / e-mail)
-- [ ] `homepage_url` no `manifest.json` trocado pela URL real
-- [ ] Constante `PRIVACY_URL` em `newtab.js` preenchida (opcional; vazio abre a cópia local)
+- [x] `docs/privacy.html` publicado em URL pública e sem login
+- [x] Contato preenchido em `docs/privacy.html` (Amanda Oliveira de Lima / e-mail)
+- [x] `homepage_url` no `manifest.json` trocado pela URL real
+- [x] Constante `PRIVACY_URL` em `newtab.js` preenchida com a URL pública
 - [ ] Data de atualização e versão iguais às do `manifest.json`
 - [ ] URL da política preenchida no Developer Dashboard
 - [ ] Categorias “Web history” e “Website content” marcadas; as demais desmarcadas

@@ -38,8 +38,8 @@ const toggleHostBtn = document.getElementById("toggle-host");
 const privacyLink = document.getElementById("privacy-link");
 
 // URL pública da política, a mesma informada no Chrome Web Store.
-// Se ficar vazia, a cópia incluída na extensão (privacy.html) é aberta.
-const PRIVACY_URL = "";
+// Se ficar vazia, a cópia incluída na extensão (docs/privacy.html) é aberta.
+const PRIVACY_URL = "https://aolivma.github.io/meu-painel/privacy.html";
 
 const ALL = "__all__";
 const UNCATEGORIZED = "__none__";
@@ -1049,8 +1049,8 @@ if (privacyLink) {
     const url =
       PRIVACY_URL ||
       (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.getURL
-        ? chrome.runtime.getURL("privacy.html")
-        : "privacy.html");
+        ? chrome.runtime.getURL("docs/privacy.html")
+        : "docs/privacy.html");
     if (typeof chrome !== "undefined" && chrome.tabs && chrome.tabs.create) {
       chrome.tabs.create({ url });
     } else {
