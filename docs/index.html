@@ -1,92 +1,775 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Meu Painel — Extensão para Google Chrome</title>
-<meta name="description" content="Meu Painel: página de nova aba do Chrome com seus links favoritos em cards, com dados armazenados apenas no seu navegador." />
-<style>
-  :root {
-    --bg: #f6f7fb;
-    --card: #ffffff;
-    --text: #1b1e26;
-    --muted: #5a6072;
-    --line: #dfe3ec;
-    --accent: #2f5cff;
-  }
-  @media (prefers-color-scheme: dark) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0d0f14" />
+  <link rel="icon" href="icon128.png" type="image/png" />
+  <title>Meu Painel — Extensão para Google Chrome</title>
+  <meta name="description" content="Meu Painel transforma a nova aba do Chrome em um painel de links favoritos em cards. Seus dados ficam apenas no seu navegador." />
+  <style>
     :root {
+      color-scheme: dark;
       --bg: #0d0f14;
+      --bg-glow: rgba(91, 140, 255, 0.16);
       --card: #171a21;
-      --text: #e8eaf1;
-      --muted: #a0a7b8;
-      --line: #2a2f3a;
-      --accent: #7c9cff;
+      --card-hover: #1e222b;
+      --border: #262b36;
+      --border-strong: #313848;
+      --surface-2: #232836;
+      --text: #e9ebf0;
+      --muted: #8b93a7;
+      --accent: #5b8cff;
+      --accent-soft: rgba(91, 140, 255, 0.14);
+      --radius: 16px;
+      --maxw: 1120px;
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 32px 20px;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-  }
-  main {
-    width: 100%;
-    max-width: 680px;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 40px;
-  }
-  h1 { margin: 0 0 8px; font-size: 1.9rem; letter-spacing: -0.02em; }
-  .tagline { margin: 0 0 28px; color: var(--muted); font-size: 1.05rem; }
-  h2 { margin: 28px 0 8px; font-size: 1.05rem; }
-  ul { margin: 8px 0 0; padding-left: 1.2em; }
-  li { margin: 4px 0; }
-  a { color: var(--accent); }
-  .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-  .button {
-    display: inline-block;
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    text-decoration: none;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .87rem; }
-  @media (max-width: 480px) { main { padding: 28px 22px; } h1 { font-size: 1.6rem; } }
-</style>
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 600px at 50% -10%, var(--bg-glow), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    img, svg { display: block; max-width: 100%; }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 clamp(18px, 4vw, 32px);
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(13, 15, 20, 0.78);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 64px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand img {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav a {
+      padding: 8px 12px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: color .15s, background .15s;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border: 1px solid var(--border-strong);
+      border-radius: 11px;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background .15s, border-color .15s, transform .15s;
+    }
+
+    .btn:hover { background: var(--surface-2); }
+    .btn:active { transform: translateY(1px); }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(91, 140, 255, 0.25);
+    }
+
+    .btn-primary:hover { background: #6d99ff; border-color: #6d99ff; }
+
+    .btn-sm { padding: 9px 15px; font-size: 0.88rem; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(32px, 6vw, 64px);
+      padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 72px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 5px 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 5.4vw, 3.3rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .lead {
+      margin: 0 0 28px;
+      max-width: 46ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.2vw, 1.12rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .hero-note li { display: inline-flex; align-items: center; gap: 6px; }
+    .hero-note svg { color: var(--accent); flex: 0 0 auto; }
+
+    /* ---------- Mockup ---------- */
+    .mockup {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #131720, #10131a);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    .mockup::before {
+      content: "";
+      position: absolute;
+      inset: -40% -20% auto;
+      height: 70%;
+      background: radial-gradient(60% 100% at 50% 0%, rgba(91, 140, 255, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .mockup-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .dots { display: flex; gap: 6px; }
+    .dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #333a47;
+    }
+    .dots span:first-child { background: #3d4657; }
+
+    .mockup-url {
+      flex: 1;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: rgba(13, 15, 20, 0.6);
+      color: var(--muted);
+      font-size: 0.7rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mockup-body { padding: clamp(14px, 3vw, 22px); }
+
+    .mockup-chips {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .mockup-chips span {
+      padding: 3px 9px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.62rem;
+      white-space: nowrap;
+    }
+
+    .mockup-chips span.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mini-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 6px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      text-align: center;
+    }
+
+    .mini-avatar {
+      display: grid;
+      place-items: center;
+      width: clamp(26px, 7vw, 38px);
+      aspect-ratio: 1;
+      border-radius: 10px;
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: clamp(0.62rem, 1.6vw, 0.8rem);
+      font-weight: 700;
+    }
+
+    .mini-card b {
+      max-width: 100%;
+      color: var(--text);
+      font-size: clamp(0.55rem, 1.4vw, 0.68rem);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mini-card small {
+      max-width: 100%;
+      color: var(--muted);
+      font-size: clamp(0.5rem, 1.2vw, 0.58rem);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mini-add {
+      border-style: dashed;
+      border-color: var(--border-strong);
+      background: transparent;
+      color: var(--muted);
+    }
+    .mini-add .mini-avatar { background: var(--accent-soft); color: var(--accent); }
+
+    /* ---------- Sections ---------- */
+    section { padding: clamp(44px, 7vw, 80px) 0; }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: clamp(24px, 4vw, 40px);
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.45rem, 3.6vw, 2.1rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    /* ---------- Features ---------- */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      transition: border-color .15s, background .15s, transform .15s;
+    }
+
+    .feature:hover {
+      border-color: var(--border-strong);
+      background: var(--card-hover);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+      border-radius: 11px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .feature h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* ---------- Steps ---------- */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 16px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 26px 22px 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: linear-gradient(180deg, var(--card), rgba(23, 26, 33, 0.55));
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: 9px;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .step h3 {
+      margin: 0 0 6px;
+      font-size: 0.98rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    code {
+      padding: 2px 6px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: rgba(13, 15, 20, 0.6);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85em;
+      word-break: break-word;
+    }
+
+    /* ---------- Privacy ---------- */
+    .privacy-card {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      padding: clamp(24px, 4vw, 34px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(600px 200px at 0% 0%, rgba(91, 140, 255, 0.08), transparent 70%),
+        var(--card);
+    }
+
+    .privacy-card .feature-icon {
+      margin: 0;
+      width: 46px;
+      height: 46px;
+    }
+
+    .privacy-text { flex: 1 1 320px; }
+
+    .privacy-text h2 { margin-bottom: 6px; }
+
+    .privacy-text p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .site-footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: clamp(36px, 7vw, 56px);
+      }
+
+      .hero-copy { order: 1; }
+      .mockup { order: 2; max-width: 560px; }
+      .lead { max-width: none; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { display: none; }
+      .site-header .wrap { min-height: 58px; }
+      .hero-actions .btn { flex: 1 1 auto; }
+      .site-footer .wrap { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 380px) {
+      .mockup-grid { gap: 7px; }
+      .mini-card { padding: 8px 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
-<main>
-  <h1>Meu Painel</h1>
-  <p class="tagline">Extensão para Google Chrome que transforma a nova aba em um painel de links favoritos em cards.</p>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <img src="icon128.png" alt="" width="30" height="30" />
+        Meu Painel
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#instalacao">Instalação</a>
+        <a href="privacy.html">Privacidade</a>
+      </nav>
+      <a class="btn btn-sm" href="https://github.com/aolivma/meu-painel">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </header>
 
-  <h2>Funcionalidades</h2>
-  <ul>
-    <li>Adicione o site atual com um clique pelo popup ou menu de contexto.</li>
-    <li>Organize os links por categorias e personalize ícones e cores.</li>
-    <li>Ajuste o tamanho dos cards e o que aparece em cada um.</li>
-    <li>Exporte e importe seus dados em JSON.</li>
-  </ul>
+  <main id="top">
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="dot"></span>Extensão para Google Chrome</p>
+          <h1 id="hero-title">Seus links favoritos, sempre a <em>um novo clique</em>.</h1>
+          <p class="lead">
+            O Meu Painel substitui a nova aba do Chrome por um painel limpo e personalizável,
+            com todos os seus sites organizados em cards — do seu jeito.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://github.com/aolivma/meu-painel">
+              Ver no GitHub
+            </a>
+            <a class="btn" href="#instalacao">Como instalar</a>
+          </div>
+          <ul class="hero-note">
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Grátis e open source
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Sem cadastro
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Dados só no seu navegador
+            </li>
+          </ul>
+        </div>
 
-  <h2>Privacidade</h2>
-  <p>Seus links e preferências ficam armazenados apenas no seu navegador. Nada é enviado ao desenvolvedor.</p>
+        <div class="mockup" role="img" aria-label="Prévia do painel com cards de links, categorias e botão de adicionar">
+          <div class="mockup-bar">
+            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="mockup-url">Nova guia</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-chips" aria-hidden="true">
+              <span class="active">Todos</span>
+              <span>Trabalho</span>
+              <span>Estudos</span>
+              <span>Música</span>
+            </div>
+            <div class="mockup-grid">
+              <div class="mini-card">
+                <span class="mini-avatar" style="background:#1f2430;color:#e9ebf0">G</span>
+                <b>GitHub</b>
+                <small>github.com</small>
+              </div>
+              <div class="mini-card">
+                <span class="mini-avatar" style="background:#2a1f22;color:#ff8a8a">Y</span>
+                <b>YouTube</b>
+                <small>youtube.com</small>
+              </div>
+              <div class="mini-card">
+                <span class="mini-avatar" style="background:#2b2418;color:#ffc46b">N</span>
+                <b>Notion</b>
+                <small>notion.so</small>
+              </div>
+              <div class="mini-card">
+                <span class="mini-avatar" style="background:#182a26;color:#6ee7c8">S</span>
+                <b>Spotify</b>
+                <small>spotify.com</small>
+              </div>
+              <div class="mini-card">
+                <span class="mini-avatar" style="background:#1b2333;color:#8fb4ff">F</span>
+                <b>Figma</b>
+                <small>figma.com</small>
+              </div>
+              <div class="mini-card mini-add">
+                <span class="mini-avatar" aria-hidden="true">+</span>
+                <b>Adicionar</b>
+                <small>novo link</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-  <div class="links">
-    <a class="button primary" href="privacy.html">Política de Privacidade</a>
-    <a class="button" href="https://github.com/aolivma/meu-painel">Código no GitHub</a>
-  </div>
+    <section id="funcionalidades" aria-labelledby="features-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="features-title">Tudo o que você precisa na nova aba</h2>
+          <p>Recursos pensados para deixar seus atalhos rápidos, bonitos e organizados.</p>
+        </div>
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <h3>Links em cards</h3>
+            <p>Seus sites favoritos em cartões com favicon, título e endereço, com tamanho ajustável.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <h3>Adição em um clique</h3>
+            <p>Salve a página atual pelo popup da extensão ou pelo menu de contexto do Chrome.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2A2 2 0 0 1 3 12V5a2 2 0 0 1 2-2h7c.5 0 1 .2 1.4.6l7.2 7.2a2 2 0 0 1 0 2.6Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+            </div>
+            <h3>Categorias</h3>
+            <p>Organize por assunto e filtre rapidamente com as etiquetas no topo do painel.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="19" r="2"/><path d="M12 2a10 10 0 1 0 0 20"/></svg>
+            </div>
+            <h3>Personalização</h3>
+            <p>Cores de fundo, cartões, ícones próprios e controle do que aparece em cada card.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            </div>
+            <h3>Backup em JSON</h3>
+            <p>Exporte e importe seus links e configurações quando quiser, sem depender de servidor.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+            </div>
+            <h3>Privacidade por padrão</h3>
+            <p>Nada é enviado ao desenvolvedor. Títulos, URLs e preferências ficam no seu navegador.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <footer>Desenvolvido por Amanda Oliveira de Lima.</footer>
-</main>
+    <section id="instalacao" aria-labelledby="install-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="install-title">Instale em menos de um minuto</h2>
+          <p>Enquanto a extensão não está na Chrome Web Store, instale em modo desenvolvedor.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <h3>Baixe o projeto</h3>
+            <p>Clone o repositório ou baixe o ZIP e extraia a pasta.</p>
+          </article>
+          <article class="step">
+            <h3>Abra as extensões</h3>
+            <p>Acesse <code>chrome://extensions</code> e ative o <strong>Modo do desenvolvedor</strong>.</p>
+          </article>
+          <article class="step">
+            <h3>Carregue a pasta</h3>
+            <p>Clique em <strong>Carregar sem compactação</strong>, selecione a pasta e abra uma nova aba.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="privacy-title">
+      <div class="wrap">
+        <div class="privacy-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div class="privacy-text">
+            <h2 id="privacy-title">Seus dados ficam com você</h2>
+            <p>
+              O Meu Painel não tem servidores, contas ou analytics. Saiba exatamente o que é
+              acessado e como apagar seus dados na política de privacidade.
+            </p>
+          </div>
+          <a class="btn" href="privacy.html">Ler a política</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© <span id="year">2026</span> Meu Painel · Amanda Oliveira de Lima</span>
+      <nav class="footer-links" aria-label="Links do rodapé">
+        <a href="privacy.html">Política de Privacidade</a>
+        <a href="https://github.com/aolivma/meu-painel">GitHub</a>
+        <a href="https://github.com/aolivma/meu-painel/issues">Problemas</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
