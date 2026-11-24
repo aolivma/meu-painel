@@ -415,6 +415,140 @@
       font-size: 0.92rem;
     }
 
+    /* ---------- Screenshots ---------- */
+    .shots {
+      display: grid;
+      gap: 16px;
+    }
+
+    .shot {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #0a0c11;
+      color: var(--text);
+      font: inherit;
+      text-align: left;
+      cursor: zoom-in;
+      overflow: hidden;
+      transition: border-color .15s, transform .15s, box-shadow .15s;
+    }
+
+    .shot:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.38);
+    }
+
+    .shot img {
+      display: block;
+      flex: 1 1 auto;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
+    .shot-cap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .shot-zoom {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .shots-dialogs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 16px;
+    }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox {
+      width: fit-content;
+      min-width: min(320px, 92vw);
+      max-width: min(1100px, 94vw);
+      max-height: 92vh;
+      padding: 0;
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      background: #0a0c11;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .lightbox::backdrop {
+      background: rgba(5, 7, 11, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .lightbox img {
+      display: block;
+      max-width: 100%;
+      max-height: 78vh;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    .lb-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 16px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .lb-caption {
+      flex: 1 1 240px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .lb-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lb-btn {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      border: 1px solid var(--border-strong);
+      border-radius: 9px;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+
+    .lb-btn:hover { background: var(--surface-2); }
+
     /* ---------- Privacy ---------- */
     .privacy-card {
       display: flex;
@@ -516,6 +650,7 @@
       </a>
       <nav class="nav" aria-label="Navegação principal">
         <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#interface">Interface</a>
         <a href="privacy.html">Privacidade</a>
       </nav>
       <a class="btn btn-sm" href="https://github.com/aolivma/meu-painel">
@@ -660,6 +795,69 @@
       </div>
     </section>
 
+    <section id="interface" aria-labelledby="shots-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="shots-title">Conheça a interface</h2>
+          <p>Capturas reais da extensão em uso. Clique em qualquer imagem para ampliar.</p>
+        </div>
+
+        <div class="shots">
+          <button class="shot" type="button" data-caption="Sua nova aba, com todos os links">
+            <img src="assets/screenshots/02-painel.png"
+                 alt="Nova aba do Meu Painel com categorias e cards de Gmail, Google Drive, Gemini, Agenda, LinkedIn, WhatsApp, GitHub, YouTube, Netflix, Instagram, Mercado Livre e g1"
+                 width="1129" height="804" loading="lazy" decoding="async" />
+            <span class="shot-cap">
+              <span>Sua nova aba, com todos os links</span>
+              <span class="shot-zoom">Ampliar</span>
+            </span>
+          </button>
+
+          <button class="shot" type="button" data-caption="Adicione a página atual em um clique">
+            <img src="assets/screenshots/01-popup.png"
+                 alt="Popup da extensão sobre o site g1, com título e URL preenchidos e categoria Notícias"
+                 width="1200" height="401" loading="lazy" decoding="async" />
+            <span class="shot-cap">
+              <span>Adicione a página atual em um clique</span>
+              <span class="shot-zoom">Ampliar</span>
+            </span>
+          </button>
+
+          <div class="shots-dialogs">
+            <button class="shot" type="button" data-caption="Personalize cores, tamanho e exibição">
+              <img src="assets/screenshots/03-personalizar.png"
+                   alt="Diálogo Personalizar com cor de fundo, tamanho dos quadros, opções de ícone, título e URL, além de exportar e importar JSON"
+                   width="606" height="759" loading="lazy" decoding="async" />
+              <span class="shot-cap">
+                <span>Personalize cores e tamanho</span>
+                <span class="shot-zoom">Ampliar</span>
+              </span>
+            </button>
+
+            <button class="shot" type="button" data-caption="Edite qualquer link quando quiser">
+              <img src="assets/screenshots/04-editar.png"
+                   alt="Diálogo Editar link com campos de título, URL, categoria, ícone e cor do card preenchidos para o Gmail"
+                   width="565" height="683" loading="lazy" decoding="async" />
+              <span class="shot-cap">
+                <span>Edite qualquer link</span>
+                <span class="shot-zoom">Ampliar</span>
+              </span>
+            </button>
+
+            <button class="shot" type="button" data-caption="Crie novos links com categorias">
+              <img src="assets/screenshots/05-adicionar.png"
+                   alt="Diálogo Adicionar link com campos vazios de título, URL, categoria, ícone e cor do card"
+                   width="508" height="642" loading="lazy" decoding="async" />
+              <span class="shot-cap">
+                <span>Crie novos links com categorias</span>
+                <span class="shot-zoom">Ampliar</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section aria-labelledby="privacy-title">
       <div class="wrap">
         <div class="privacy-card">
@@ -690,8 +888,56 @@
     </div>
   </footer>
 
+  <dialog id="lightbox" class="lightbox" aria-labelledby="lb-caption">
+    <img id="lb-img" src="assets/screenshots/02-painel.png" alt="" />
+    <div class="lb-bar">
+      <p id="lb-caption" class="lb-caption"></p>
+      <div class="lb-controls">
+        <button class="lb-btn" id="lb-prev" type="button" aria-label="Imagem anterior">‹</button>
+        <button class="lb-btn" id="lb-next" type="button" aria-label="Próxima imagem">›</button>
+        <button class="lb-btn" id="lb-close" type="button" aria-label="Fechar">✕</button>
+      </div>
+    </div>
+  </dialog>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const shotButtons = [...document.querySelectorAll(".shot")];
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lb-img");
+    const lbCaption = document.getElementById("lb-caption");
+    const shots = shotButtons.map((button) => {
+      const img = button.querySelector("img");
+      return { src: img.getAttribute("src"), alt: img.alt, caption: button.dataset.caption || "" };
+    });
+    let activeShot = 0;
+
+    function showShot(index) {
+      activeShot = (index + shots.length) % shots.length;
+      const shot = shots[activeShot];
+      lbImg.src = shot.src;
+      lbImg.alt = shot.alt;
+      lbCaption.textContent = shot.caption;
+      if (!lightbox.open) lightbox.showModal();
+    }
+
+    shotButtons.forEach((button, index) => {
+      button.addEventListener("click", () => showShot(index));
+    });
+
+    document.getElementById("lb-prev").addEventListener("click", () => showShot(activeShot - 1));
+    document.getElementById("lb-next").addEventListener("click", () => showShot(activeShot + 1));
+    document.getElementById("lb-close").addEventListener("click", () => lightbox.close());
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) lightbox.close();
+    });
+
+    lightbox.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") showShot(activeShot - 1);
+      if (event.key === "ArrowRight") showShot(activeShot + 1);
+    });
   </script>
 </body>
 </html>

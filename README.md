@@ -36,6 +36,7 @@ Extensão para Google Chrome (Manifest V3) que substitui a página de nova aba p
 | `docs/privacy.html` | Política de privacidade (publicada no GitHub Pages) |
 | `docs/index.html` | Página inicial do site publicado |
 | `docs/icon128.png` | Ícone usado na página publicada |
+| `docs/assets/screenshots/` | Capturas reais da extensão usadas na página inicial |
 | `icons/` | Ícones da extensão |
 
 ## Privacidade
