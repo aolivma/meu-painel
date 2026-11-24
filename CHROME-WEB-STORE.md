@@ -118,10 +118,13 @@ execução de código baixado.
 
 ---
 
-## 5. Divulgação antes da instalação (descrição da loja)
+## 5. Descrição da loja
 
-A política exige divulgação destacada **antes da instalação** e consentimento informado. Inclua este
-parágrafo na descrição do item (além do texto normal de features):
+Textos prontos para colar (nome, descrição curta e descrição completa) em
+[`store-assets/listing-pt-br.md`](store-assets/listing-pt-br.md). A descrição completa já inclui a
+divulgação de privacidade exigida **antes da instalação**.
+
+Se precisar do parágrafo de divulgação isolado (para outro idioma ou campo), use:
 
 **PT-BR**
 
@@ -130,7 +133,7 @@ parágrafo na descrição do item (além do texto normal de features):
 > aba, ele pode baixar o HTML de um site salvo para descobrir o ícone declarado por ele. Seus links e
 > ajustes ficam no armazenamento do Chrome e, se você usa a sincronização, na sua conta do Google. O
 > desenvolvedor não tem servidores, não recebe seus dados e não os vende. Política completa:
-> `URL_DA_POLITICA`.
+> https://aolivma.github.io/meu-painel/privacy.html
 
 **EN**
 
@@ -138,7 +141,8 @@ parágrafo na descrição do item (além do texto normal de features):
 > you choose to save it, never other tabs or your history. When the New Tab page opens, it may
 > download a saved site's HTML to discover the icon that site declares. Your links and settings stay
 > in Chrome's storage and, with sync enabled, in your Google Account. The developer has no servers,
-> never receives your data, and never sells it. Full policy: `URL_DA_POLITICA`.
+> never receives your data, and never sells it. Full policy:
+> https://aolivma.github.io/meu-painel/privacy.html
 
 ---
 
@@ -203,13 +207,16 @@ Mantenha esse texto alinhado com a política: se o comportamento mudar, ajuste o
 - [x] Contato preenchido em `docs/privacy.html` (Amanda Oliveira de Lima / e-mail)
 - [x] `homepage_url` no `manifest.json` trocado pela URL real
 - [x] Constante `PRIVACY_URL` em `newtab.js` preenchida com a URL pública
-- [ ] Data de atualização e versão iguais às do `manifest.json`
+- [x] Data de atualização e versão iguais às do `manifest.json`
 - [ ] URL da política preenchida no Developer Dashboard
 - [ ] Categorias “Web history” e “Website content” marcadas; as demais desmarcadas
 - [ ] Três certificações de uso limitado marcadas
 - [ ] Single purpose e justificativas de permissão preenchidos
 - [ ] Divulgação de privacidade na descrição da loja (antes da instalação)
-- [ ] Declaração de Uso Limitado publicada no site (seção 14 da política)
+- [x] Declaração de Uso Limitado publicada no site (seção 14 da política)
 - [x] Divulgação na interface do produto (nota no popup + link no “Personalizar”)
-- [ ] Descrição, ícones e screenshots atualizados (a loja rejeita campo vazio)
+- [x] Textos da listagem prontos ([`store-assets/listing-pt-br.md`](store-assets/listing-pt-br.md))
+- [x] Screenshots 1280×800 prontos (5 imagens)
+- [x] Tile 440×280 e marquee 1400×560 prontos
+- [ ] Descrição e imagens enviadas no Developer Dashboard
 - [ ] Verificação em duas etapas ativa na conta de desenvolvedor

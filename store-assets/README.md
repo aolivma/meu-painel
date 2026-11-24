@@ -25,6 +25,11 @@ requisitos da Chrome Web Store (1280×800 ou 640×400; até 5 imagens).
 Ambas em PNG 24 bits, sem transparência. O tile é renderizado em 2× e reduzido para
 manter o texto nítido.
 
+## Textos da listagem
+
+Os textos prontos para colar no formulário (nome, descrição curta e descrição detalhada) estão em
+[`listing-pt-br.md`](listing-pt-br.md).
+
 ## Regenerar
 
 As imagens são montadas em HTML e capturadas pelo Chrome headless:
