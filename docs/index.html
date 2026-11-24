@@ -415,59 +415,6 @@
       font-size: 0.92rem;
     }
 
-    /* ---------- Steps ---------- */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-      gap: 16px;
-      counter-reset: step;
-    }
-
-    .step {
-      position: relative;
-      padding: 26px 22px 22px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: linear-gradient(180deg, var(--card), rgba(23, 26, 33, 0.55));
-    }
-
-    .step::before {
-      counter-increment: step;
-      content: counter(step);
-      display: grid;
-      place-items: center;
-      width: 34px;
-      height: 34px;
-      margin-bottom: 14px;
-      border: 1px solid var(--border-strong);
-      border-radius: 9px;
-      color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .step h3 {
-      margin: 0 0 6px;
-      font-size: 0.98rem;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    code {
-      padding: 2px 6px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: rgba(13, 15, 20, 0.6);
-      color: var(--text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.85em;
-      word-break: break-word;
-    }
-
     /* ---------- Privacy ---------- */
     .privacy-card {
       display: flex;
@@ -569,7 +516,6 @@
       </a>
       <nav class="nav" aria-label="Navegação principal">
         <a href="#funcionalidades">Funcionalidades</a>
-        <a href="#instalacao">Instalação</a>
         <a href="privacy.html">Privacidade</a>
       </nav>
       <a class="btn btn-sm" href="https://github.com/aolivma/meu-painel">
@@ -595,7 +541,6 @@
             <a class="btn btn-primary" href="https://github.com/aolivma/meu-painel">
               Ver no GitHub
             </a>
-            <a class="btn" href="#instalacao">Como instalar</a>
           </div>
           <ul class="hero-note">
             <li>
@@ -710,29 +655,6 @@
             </div>
             <h3>Privacidade por padrão</h3>
             <p>Nada é enviado ao desenvolvedor. Títulos, URLs e preferências ficam no seu navegador.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="instalacao" aria-labelledby="install-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 id="install-title">Instale em menos de um minuto</h2>
-          <p>Enquanto a extensão não está na Chrome Web Store, instale em modo desenvolvedor.</p>
-        </div>
-        <div class="steps">
-          <article class="step">
-            <h3>Baixe o projeto</h3>
-            <p>Clone o repositório ou baixe o ZIP e extraia a pasta.</p>
-          </article>
-          <article class="step">
-            <h3>Abra as extensões</h3>
-            <p>Acesse <code>chrome://extensions</code> e ative o <strong>Modo do desenvolvedor</strong>.</p>
-          </article>
-          <article class="step">
-            <h3>Carregue a pasta</h3>
-            <p>Clique em <strong>Carregar sem compactação</strong>, selecione a pasta e abra uma nova aba.</p>
           </article>
         </div>
       </div>
