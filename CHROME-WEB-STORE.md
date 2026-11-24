@@ -10,8 +10,8 @@ em [`privacy.html`](privacy.html).
 
 1. Contato já preenchido em `privacy.html` (blocos PT e EN): **Amanda Oliveira de Lima** /
    **amandaoliveiradelima@gmail.com**. Se mudar, atualize os dois blocos.
-2. Em `manifest.json`, troque `https://SEU-USUARIO.github.io/mylinks/` em `homepage_url` pela URL
-   real do projeto (a mesma base onde a política será publicada).
+2. O `manifest.json` já aponta `homepage_url` para a URL real do projeto:
+   `https://aolivma.github.io/meu-painel/` (mesma base onde a política é publicada).
 3. Publique em uma URL **pública, sem login, sem 404 e sem redirecionar para outra página**.
 4. Informe essa URL em **Developer Dashboard → seu item → Store listing → Privacy practices →
    Privacy policy URL**.
@@ -22,7 +22,7 @@ em [`privacy.html`](privacy.html).
 
 | Opção | Como | URL típica |
 | --- | --- | --- |
-| **GitHub Pages** (recomendado) | Repositório público → Settings → Pages → Deploy from branch → `main` / `/ (root)` | `https://SEU-USUARIO.github.io/mylinks/privacy.html` |
+| **GitHub Pages** (recomendado) | Repositório público → Settings → Pages → Deploy from branch → `main` / `/ (root)` | `https://aolivma.github.io/meu-painel/privacy.html` |
 | **Netlify Drop** | Arraste uma pasta com `privacy.html` em <https://app.netlify.com/drop> | `https://nome-aleatorio.netlify.app/privacy.html` |
 | **Cloudflare Pages** | Upload direto ou conexão com o repositório | `https://projeto.pages.dev/privacy.html` |
 

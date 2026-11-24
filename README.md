@@ -38,7 +38,7 @@ Extensão para Google Chrome (Manifest V3) que substitui a página de nova aba p
 
 ## Privacidade
 
-A extensão não envia dados ao desenvolvedor. Títulos, URLs e preferências ficam armazenados apenas no seu navegador. Veja [privacy.html](privacy.html).
+A extensão não envia dados ao desenvolvedor. Títulos, URLs e preferências ficam armazenados apenas no seu navegador. Veja [privacy.html](privacy.html) ou a versão publicada em <https://aolivma.github.io/meu-painel/privacy.html>.
 
 ## Licença
 

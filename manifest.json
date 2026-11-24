@@ -3,7 +3,7 @@
   "name": "Meu Painel",
   "version": "1.7.1",
   "description": "Página inicial com seus links favoritos em cards.",
-  "homepage_url": "https://SEU-USUARIO.github.io/mylinks/",
+  "homepage_url": "https://aolivma.github.io/meu-painel/",
   "minimum_chrome_version": "104",
   "permissions": ["storage", "favicon", "activeTab", "contextMenus"],
   "host_permissions": ["<all_urls>"],
