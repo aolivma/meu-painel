@@ -30,6 +30,17 @@ manter o texto nítido.
 Os textos prontos para colar no formulário (nome, descrição curta e descrição detalhada) estão em
 [`listing-pt-br.md`](listing-pt-br.md).
 
+## Pacote de upload
+
+```bash
+node store-assets/build-package.mjs
+```
+
+Gera `store-assets/meu-painel-<versão>.zip` (lido do `manifest.json`) contendo apenas os arquivos
+da extensão, com `manifest.json` na raiz: scripts, HTML, CSS, ícones, `LICENSE` e
+`docs/privacy.html` (cópia offline usada como fallback do link de privacidade). O ZIP não é
+versionado — está no `.gitignore`.
+
 ## Regenerar
 
 As imagens são montadas em HTML e capturadas pelo Chrome headless:

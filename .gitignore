@@ -5,3 +5,5 @@ Thumbs.db
 *.pem
 node_modules/
 store-assets/.render/
+store-assets/.package/
+
