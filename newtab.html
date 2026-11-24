@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meu Painel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <h1>Meu Painel</h1>
+        <button id="settings-btn" class="gear-btn" type="button"
+                title="Personalizar" aria-label="Personalizar">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.03-1.58ZM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2Z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div id="chips" class="chips" hidden></div>
+
+    <main id="grid" class="grid"></main>
+
+    <p id="empty" class="empty" hidden></p>
+  </div>
+
+  <dialog id="dialog">
+    <form id="form" method="dialog">
+      <h2 id="dialog-heading">Adicionar link</h2>
+
+      <label>
+        Título
+        <input id="input-title" type="text" required maxlength="60"
+               placeholder="Ex.: GitHub" autocomplete="off" />
+      </label>
+
+      <label>
+        URL
+        <input id="input-url" type="text" required
+               placeholder="https://github.com" autocomplete="off"
+               inputmode="url" spellcheck="false" />
+      </label>
+
+      <label>
+        Categoria (opcional)
+        <input id="input-category" type="text" maxlength="40"
+               list="category-options" placeholder="Ex.: Trabalho"
+               autocomplete="off" />
+      </label>
+      <datalist id="category-options"></datalist>
+
+      <div class="icon-field">
+        <span class="field-label">Ícone (opcional)</span>
+        <div class="icon-row">
+          <span id="icon-preview" class="avatar preview"></span>
+          <div class="icon-controls">
+            <input id="input-icon-url" type="text" placeholder="URL da imagem (https://...)"
+                   autocomplete="off" spellcheck="false" />
+            <div class="icon-file-row">
+              <label class="file-btn">
+                Escolher arquivo
+                <input id="input-icon-file" type="file" accept="image/*" hidden />
+              </label>
+              <button id="icon-none" type="button" class="ghost">Sem imagem</button>
+              <button id="icon-reset" type="button" class="ghost">Restaurar padrão</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="icon-field">
+        <span class="field-label">Cor do card (opcional)</span>
+        <div class="color-row">
+          <input id="input-card-color" type="color" value="#171a21"
+                 aria-label="Cor do card" />
+          <input id="input-card-color-hex" type="text" placeholder="Padrão"
+                 maxlength="7" spellcheck="false" autocomplete="off"
+                 aria-label="Código da cor do card" />
+          <button id="card-color-reset" type="button" class="ghost">Padrão</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="cancel-btn" type="button">Cancelar</button>
+        <button class="primary" type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="settings-dialog">
+    <form id="settings-form" method="dialog">
+      <h2>Personalizar</h2>
+
+      <div class="settings-field">
+        <span class="field-label">Cor do plano de fundo</span>
+        <div class="color-row">
+          <input id="setting-bg" type="color" value="#0d0f14"
+                 aria-label="Cor do plano de fundo" />
+          <input id="setting-bg-hex" type="text" value="#0D0F14" maxlength="7"
+                 spellcheck="false" autocomplete="off"
+                 aria-label="Código da cor" />
+        </div>
+      </div>
+
+      <div class="settings-field">
+        <div class="range-header">
+          <span class="field-label">Tamanho dos quadros</span>
+          <span id="card-size-value" class="range-value">180 px</span>
+        </div>
+        <input id="setting-card-size" type="range" min="50" max="320" step="10"
+               value="180" aria-label="Tamanho dos quadros" />
+      </div>
+
+      <div class="settings-field">
+        <span class="field-label">Exibir no quadro</span>
+        <div class="toggle-list">
+          <div class="toggle-row">
+            <span class="toggle-label">Ícone</span>
+            <button id="toggle-icon" class="toggle-btn" type="button"
+                    role="switch" aria-checked="true"
+                    aria-label="Mostrar ícone"></button>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Título</span>
+            <button id="toggle-title" class="toggle-btn" type="button"
+                    role="switch" aria-checked="true"
+                    aria-label="Mostrar título"></button>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">URL</span>
+            <button id="toggle-host" class="toggle-btn" type="button"
+                    role="switch" aria-checked="true"
+                    aria-label="Mostrar URL"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-field">
+        <span class="field-label">Backup</span>
+        <div class="backup-row">
+          <button id="export-btn" type="button" class="ghost">Exportar JSON</button>
+          <button id="import-btn" type="button" class="ghost">Importar JSON</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden />
+        </div>
+        <p id="backup-status" class="backup-status" hidden></p>
+      </div>
+
+      <p class="settings-privacy">
+        <a id="privacy-link" href="privacy.html" target="_blank" rel="noopener">
+          Política de privacidade
+        </a>
+      </p>
+
+      <div class="actions">
+        <button id="settings-reset" type="button">Restaurar padrão</button>
+        <button id="settings-cancel" type="button">Cancelar</button>
+        <button class="primary" type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="context-menu" class="context-menu" hidden>
+    <button id="context-delete" class="danger" type="button">Excluir link</button>
+  </div>
+
+  <script src="store.js"></script>
+  <script src="newtab.js"></script>
+</body>
+</html>

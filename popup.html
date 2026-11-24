@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Adicionar a meus links</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <form id="form">
+    <h1>Adicionar a meus links</h1>
+
+    <label>
+      Título
+      <input id="title" type="text" required maxlength="60" autocomplete="off" />
+    </label>
+
+    <label>
+      URL
+      <input id="url" type="text" required spellcheck="false"
+             autocomplete="off" inputmode="url" />
+    </label>
+
+    <p class="privacy-note">
+      Lemos o título e o endereço desta aba apenas para salvar o link.
+      Nada é enviado ao desenvolvedor.
+    </p>
+
+    <label>
+      Categoria (opcional)
+      <input id="category" type="text" maxlength="40"
+             list="category-options" placeholder="Ex.: Trabalho" autocomplete="off" />
+    </label>
+    <datalist id="category-options"></datalist>
+
+    <button id="submit" class="primary" type="submit">Adicionar a meus links</button>
+    <p id="status" class="status"></p>
+  </form>
+
+  <script src="store.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

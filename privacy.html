@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Política de Privacidade — Meu Painel</title>
+<meta name="description" content="Política de privacidade da extensão Meu Painel: quais dados são acessados, onde ficam armazenados e como apagá-los." />
+
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --text: #1b1e26;
+    --muted: #5a6072;
+    --line: #dfe3ec;
+    --accent: #2f5cff;
+    --warn-bg: #eef3ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d0f14;
+      --card: #151922;
+      --text: #e8ebf3;
+      --muted: #a3aabd;
+      --line: #2a3040;
+      --accent: #8fa8ff;
+      --warn-bg: #1a2133;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 40px 20px 72px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 780px; margin: 0 auto; }
+  header { margin-bottom: 28px; }
+  h1 { font-size: clamp(1.7rem, 4vw, 2.1rem); line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.02em; }
+  h2 { font-size: 1.2rem; margin: 40px 0 12px; letter-spacing: -0.01em; }
+  h3 { font-size: 1rem; margin: 24px 0 6px; }
+  p, li { color: var(--text); }
+  .meta { color: var(--muted); font-size: 0.92rem; margin: 0; }
+  .lead { font-size: 1.05rem; }
+  .summary {
+    background: var(--warn-bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin: 28px 0 8px;
+  }
+  .summary h2 { margin: 0 0 8px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .summary ul { margin: 0; padding-left: 20px; }
+  .summary li { margin: 6px 0; }
+  .table-wrap { overflow-x: auto; margin: 16px 0 8px; border: 1px solid var(--line); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.95rem; background: var(--card); }
+  th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+  th { background: rgba(127, 127, 127, 0.08); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  tr:last-child td { border-bottom: 0; }
+  code { font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: rgba(127, 127, 127, 0.14); padding: 1px 5px; border-radius: 5px; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 7px 0; }
+  a { color: var(--accent); }
+  .box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 18px 0; }
+  .box h3 { margin-top: 0; }
+  .contact { font-size: 1.02rem; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
+  .en { border-top: 1px solid var(--line); margin-top: 64px; padding-top: 8px; }
+  .en h1 { font-size: clamp(1.5rem, 3.5vw, 1.8rem); }
+  @media print {
+    body { background: #fff; color: #000; padding: 0; }
+    .summary, .box, table { background: #fff; }
+    a { color: #000; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <h1>Política de Privacidade — Meu Painel</h1>
+    <p class="meta">Extensão para Google Chrome · Versão 1.7.1 · Última atualização: 24 de novembro de 2026</p>
+  </header>
+
+  <p class="lead">
+    O <strong>Meu Painel</strong> substitui a página de nova aba do Chrome por um painel pessoal de
+    links favoritos. Esta política explica, de forma específica, quais informações a extensão acessa,
+    para que elas são usadas, onde ficam armazenadas, com quem são compartilhadas e como você pode
+    apagá-las.
+  </p>
+
+  <div class="summary">
+    <h2>Resumo</h2>
+    <ul>
+      <li>Os dados ficam no seu próprio navegador: no armazenamento local do Chrome e, se você usa a
+        sincronização do Chrome, na sua conta do Google.</li>
+      <li>O desenvolvedor <strong>não opera servidores</strong> e não recebe, não vê e não vende seus dados.</li>
+      <li>Não há anúncios, análises de uso (analytics), rastreadores, perfilamento ou código remoto.</li>
+      <li>A extensão lê o endereço (URL) e o título de uma aba <strong>somente quando você manda salvar
+        aquela página</strong>, e baixa o HTML de um site salvo apenas para descobrir o ícone declarado
+        por ele.</li>
+    </ul>
+  </div>
+
+  <h2>1. Escopo desta política</h2>
+  <p>
+    Esta política se aplica à extensão <strong>Meu Painel</strong> distribuída na Chrome Web Store e a
+    todas as suas telas: popup, menu de contexto, página de nova aba e diálogos de personalização. Ela não se aplica a sites de terceiros que você decide salvar, nem a
+    outros produtos do Google. Ao instalar e usar a extensão, você concorda com as práticas descritas
+    aqui.
+  </p>
+
+  <h2>2. Quais dados a extensão acessa e por quê</h2>
+  <p>
+    A tabela abaixo descreve exatamente o que é acessado, em que momento e onde o dado fica. Não há
+    coleta em segundo plano de páginas que você não escolheu salvar.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Dado</th>
+          <th>Quando é acessado</th>
+          <th>Onde fica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Endereço (URL) e título da aba ativa</strong></td>
+          <td>Somente quando você abre o popup da extensão ou usa o item “Adicionar a meus links” no menu
+            de contexto. É a aba em que você clicou — nunca as outras abas, nunca o histórico completo.</td>
+          <td>Junto do link salvo, em <code>chrome.storage.sync</code></td>
+        </tr>
+        <tr>
+          <td><strong>Título, URL, categoria e cor do cartão</strong> que você digita ou edita</td>
+          <td>Quando você salva ou edita um cartão</td>
+          <td><code>chrome.storage.sync</code></td>
+        </tr>
+        <tr>
+          <td><strong>Conteúdo HTML da página salva</strong> e, se existir, o <strong>manifesto do site</strong></td>
+          <td>Quando a página de nova aba é aberta e algum link salvo ainda não tem ícone. A extensão faz
+            uma requisição direta ao próprio site (até 3 por vez) para localizar o ícone declarado
+            (<code>&lt;link rel="icon"&gt;</code>, <code>apple-touch-icon</code> ou manifesto). O HTML é
+            descartado logo após a leitura; só a URL do ícone encontrado é guardada.</td>
+          <td>Não é armazenado. Apenas a URL do ícone vai para <code>chrome.storage.local</code></td>
+        </tr>
+        <tr>
+          <td><strong>Ícone personalizado</strong> (imagem escolhida por você ou URL de imagem informada)</td>
+          <td>Quando você define um ícone no diálogo do link</td>
+          <td><code>chrome.storage.local</code> (a imagem é convertida em <em>data URL</em> e não sai do
+            dispositivo)</td>
+        </tr>
+        <tr>
+          <td><strong>Ajustes de aparência</strong> (cor de fundo, tamanho dos quadros, o que exibir)</td>
+          <td>Quando você salva as preferências</td>
+          <td><code>chrome.storage.local</code></td>
+        </tr>
+        <tr>
+          <td><strong>Backup em JSON</strong></td>
+          <td>Somente quando você clica em “Exportar JSON”</td>
+          <td>Arquivo salvo por você no seu computador</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    <strong>Categorias de dados na Chrome Web Store.</strong> Para os fins das declarações da Chrome Web
+    Store, a extensão trata: (a) <em>atividade de navegação</em> — os endereços das páginas que você
+    escolhe salvar; e (b) <em>conteúdo de sites</em> — o HTML baixado temporariamente para localizar o
+    ícone. Ambos são usados exclusivamente para o funcionamento do painel de links.
+  </p>
+
+  <h2>3. Como esses dados são usados</h2>
+  <ul>
+    <li>Montar e ordenar os cartões da sua página de nova aba.</li>
+    <li>Preencher automaticamente o formulário com o título e o endereço da página que você quer salvar.</li>
+    <li>Exibir o ícone do site e as cores/categorias que você escolheu.</li>
+    <li>Sincronizar seus links entre os navegadores em que você está conectado à mesma conta do Google
+      (apenas se a sincronização do Chrome estiver ativada).</li>
+    <li>Gerar e restaurar backups quando você pedir.</li>
+  </ul>
+  <p>
+    Esses são os únicos usos. A extensão não usa os dados para publicidade, perfilamento, análise de
+    comportamento, treinamento de modelos, concessão de crédito ou qualquer finalidade não relacionada ao
+    painel de links.
+  </p>
+
+  <h2>4. O que a extensão não faz</h2>
+  <ul>
+    <li>Não lê o histórico de navegação, as abas em segundo plano, formulários, senhas ou o conteúdo de
+      páginas que você não salvou.</li>
+    <li>Não injeta scripts nem modifica os sites que você visita.</li>
+    <li>Não envia dados para servidores do desenvolvedor — eles não existem.</li>
+    <li>Não usa analytics, pixels, cookies de rastreamento ou identificadores de publicidade.</li>
+    <li>Não vende, aluga ou transfere dados para anunciantes, corretores de dados ou revendedores de
+      informações.</li>
+    <li>Não carrega nem executa código remoto; todo o JavaScript vem do pacote da extensão.</li>
+  </ul>
+
+  <h2>5. Onde os dados ficam armazenados</h2>
+  <ul>
+    <li><strong><code>chrome.storage.sync</code></strong> — registros dos links (título, URL, categoria,
+      cor, identificador e ordem). O Chrome sincroniza esse espaço com a sua conta do Google quando a
+      sincronização está ativa. Esse tráfego é operado pelo Google e regido pela
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do
+      Google</a>. O desenvolvedor não tem acesso a esses dados.</li>
+    <li><strong><code>chrome.storage.local</code></strong> — ícones personalizados, URLs de ícones
+      descobertos automaticamente e ajustes de aparência. Ficam no seu dispositivo e não são
+      sincronizados.</li>
+    <li><strong>Backup JSON</strong> — só existe se você exportar; fica onde você salvar o arquivo.</li>
+  </ul>
+  <p>
+    Se a sincronização do Chrome estiver indisponível, a extensão passa a gravar os links apenas no
+    armazenamento local. Você pode desativar a sincronização a qualquer momento nas configurações da sua
+    conta do Google, sem perder os links já salvos no dispositivo.
+  </p>
+
+  <h2>6. Conexões de rede</h2>
+  <p>
+    A extensão não se comunica com o desenvolvedor nem com serviços de terceiros para coletar dados.
+    Existem apenas estas conexões, todas necessárias ao funcionamento:
+  </p>
+  <ul>
+    <li><strong>Requisições diretas ao site que você salvou.</strong> Ao abrir a nova aba, para links
+      ainda sem ícone, a extensão baixa o HTML da própria página e, se houver, o manifesto do site, para
+      descobrir o ícone declarado. Essas requisições partem do seu navegador para o site em questão,
+      <strong>sem enviar cookies</strong> (<code>credentials: "omit"</code>) e sem incluir qualquer dado
+      seu além do necessário para a requisição. O conteúdo é descartado após a leitura.</li>
+    <li><strong>Cache de favicons do Chrome.</strong> Os ícones exibidos nos cartões vêm do cache local de
+      favicons do navegador (<code>chrome://favicon</code>), sem requisição externa.</li>
+    <li><strong>Serviço de favicons do Google (apenas fora do modo extensão).</strong> Se os arquivos da
+      página forem abertos como um site comum, e não como extensão, os ícones podem ser carregados do
+      serviço público de favicons do Google. Na extensão instalada, isso não acontece.</li>
+  </ul>
+  <p>
+    Como toda navegação na web, essas conexões diretas expõem ao site visitado informações técnicas
+    normais do seu navegador (endereço IP, tipo de navegador e horário do acesso). Esse é o mesmo tipo de
+    acesso que ocorre quando você abre o site normalmente.
+  </p>
+
+  <h2>7. Compartilhamento com terceiros</h2>
+  <p>
+    O desenvolvedor não compartilha, vende nem transfere seus dados, porque não os recebe. Os únicos
+    terceiros envolvidos são:
+  </p>
+  <ul>
+    <li><strong>Google</strong> — quando você usa a sincronização do Chrome, conforme a política de
+      privacidade do Google.</li>
+    <li><strong>Os próprios sites salvos</strong> — que recebem a requisição descrita no item 6 para que
+      o ícone possa ser localizado.</li>
+  </ul>
+
+  <h2>8. Retenção e exclusão</h2>
+  <ul>
+    <li><strong>Apagar um link:</strong> clique com o botão direito no cartão e escolha “Excluir link”.
+      O registro e o ícone correspondente são removidos do armazenamento.</li>
+    <li><strong>Restaurar padrão:</strong> no diálogo “Personalizar”, isso apaga os ajustes de aparência.</li>
+    <li><strong>Desinstalar a extensão:</strong> o Chrome remove os dados da extensão, tanto no
+      armazenamento local quanto no sincronizado. Backups exportados por você continuam no seu
+      computador.</li>
+    <li><strong>Conta do Google:</strong> você pode gerenciar ou limpar os dados de sincronização das
+      extensões nas configurações da sua conta.</li>
+  </ul>
+  <p>
+    O prazo de retenção é o tempo em que o link existir na extensão instalada. Não há cópia mantida pelo
+    desenvolvedor.
+  </p>
+
+  <h2>9. Segurança</h2>
+  <p>
+    Os dados permanecem sob o modelo de segurança do próprio navegador: o armazenamento de extensões é
+    isolado por origem e protegido pelo Chrome. A sincronização, quando ativa, é feita pelo Google por
+    conexões criptografadas. Nenhum dado é transmitido ao desenvolvedor, de modo que não há base de dados
+    nossa para ser vazada. Recomendamos manter o Chrome atualizado e proteger sua conta do Google com
+    verificação em duas etapas.
+  </p>
+
+  <h2>10. Crianças</h2>
+  <p>
+    A extensão não é direcionada a crianças menores de 13 anos e não coleta intencionalmente dados de
+    crianças. Como não há coleta pelo desenvolvedor, não mantemos informações de idade ou de menores.
+  </p>
+
+  <h2>11. Seus direitos (LGPD, GDPR e leis semelhantes)</h2>
+  <p>
+    Como o desenvolvedor não recebe nem armazena dados pessoais em servidores próprios, não existe base
+    de dados nossa para acesso, correção, portabilidade ou eliminação. Você exerce controle direto sobre
+    as informações: pode ver, editar, exportar e excluir cada link e ajuste dentro da extensão, e
+    gerenciar a sincronização na sua conta do Google. Ainda assim, se tiver dúvidas sobre privacidade ou
+    quiser exercer um direito previsto na LGPD (Lei nº 13.709/2018), no GDPR ou em outra lei aplicável,
+    escreva para o contato abaixo e responderemos.
+  </p>
+
+  <h2>12. Alterações nesta política</h2>
+  <p>
+    Se as práticas de dados mudarem (por exemplo, com uma nova funcionalidade que acesse outros dados),
+    esta página será atualizada e a data de “Última atualização” será alterada. Mudanças relevantes serão
+    comunicadas na descrição da extensão na Chrome Web Store e, quando exigido, dentro do próprio produto
+    antes de a nova prática entrar em vigor. A versão publicada nesta URL é sempre a versão vigente.
+  </p>
+
+  <h2>13. Contato</h2>
+  <p class="contact">
+    Responsável: <strong>Amanda Oliveira de Lima</strong><br />
+    E-mail: <a href="mailto:amandaoliveiradelima@gmail.com">amandaoliveiradelima@gmail.com</a>
+  </p>
+  <p>
+    Respondemos em até 30 dias. Para agilizar, informe que se trata da extensão Meu Painel e a versão
+    instalada (visível em <code>chrome://extensions</code>).
+  </p>
+
+  <h2>14. Declaração de Uso Limitado</h2>
+  <div class="box">
+    <p>
+      O uso das informações recebidas das APIs do Google seguirá a Política de Dados do Usuário da Chrome
+      Web Store, incluindo os requisitos de Uso Limitado.
+    </p>
+    <p lang="en">
+      <em>“The use of information received from Google APIs will adhere to the Chrome Web Store User Data
+      Policy, including the Limited Use requirements.”</em>
+    </p>
+  </div>
+
+  <footer>
+    Meu Painel é uma extensão independente, sem vínculo com o Google. Google Chrome é uma marca do
+    Google LLC. Esta página não usa cookies, fontes externas, scripts ou recursos de terceiros.
+  </footer>
+
+  <section class="en" lang="en">
+    <h1>Privacy Policy — Meu Painel (English)</h1>
+    <p class="meta">Chrome extension · Version 1.7.1 · Last updated: November 24, 2026</p>
+
+    <p class="lead">
+      <strong>Meu Painel</strong> replaces Chrome's New Tab page with a personal dashboard of saved
+      links. This policy explains what information the extension accesses, why, where it is stored, with
+      whom it is shared, and how you can delete it.
+    </p>
+
+    <div class="summary">
+      <h2>Summary</h2>
+      <ul>
+        <li>Your data stays in your own browser: Chrome's local storage and, if you use Chrome Sync,
+          your Google Account.</li>
+        <li>The developer runs <strong>no servers</strong> and never receives, sees, or sells your data.</li>
+        <li>No ads, analytics, trackers, profiling, or remote code.</li>
+        <li>The extension reads a tab's URL and title <strong>only when you ask to save that page</strong>,
+          and downloads a saved site's HTML only to discover the icon that site declares.</li>
+      </ul>
+    </div>
+
+    <h2>1. Scope</h2>
+    <p>
+      This policy applies to the <strong>Meu Painel</strong> extension distributed on the Chrome Web
+      Store and to all of its screens (popup, context menu, New Tab page, and settings dialogs). It does
+      not apply to third-party sites you choose to save or to other Google products.
+    </p>
+
+    <h2>2. Data accessed and why</h2>
+    <ul>
+      <li><strong>URL and title of the active tab</strong> — read only when you open the extension popup
+        or use the “Adicionar a meus links” context-menu item, for the tab you acted on. Never other
+        tabs, never your full history. Stored with the saved link in <code>chrome.storage.sync</code>.</li>
+      <li><strong>Title, URL, category, and card color</strong> you enter or edit — stored in
+        <code>chrome.storage.sync</code>.</li>
+      <li><strong>HTML of the saved page</strong> and, if present, the site's web app manifest —
+        downloaded directly from that site (up to 3 at a time) when the New Tab page opens and a saved
+        link has no icon yet, solely to locate the declared icon. The HTML is discarded after reading;
+        only the icon URL is kept, in <code>chrome.storage.local</code>.</li>
+      <li><strong>Custom icon</strong> — an image you pick (converted to a data URL) or an image URL you
+        provide, stored in <code>chrome.storage.local</code>.</li>
+      <li><strong>Appearance settings</strong> — background color, card size, and visibility toggles,
+        stored in <code>chrome.storage.local</code>.</li>
+      <li><strong>JSON backup</strong> — created only when you click “Exportar JSON”, saved by you to
+        your computer.</li>
+    </ul>
+    <p>
+      <strong>Chrome Web Store data categories.</strong> The extension handles (a) <em>web browsing
+      activity</em> — the addresses of pages you explicitly save — and (b) <em>website content</em> —
+      HTML fetched temporarily to locate icons. Both are used exclusively to operate the links
+      dashboard.
+    </p>
+
+    <h2>3. How data is used</h2>
+    <p>
+      Only to build and order the New Tab dashboard cards, prefill the save form with the page you chose,
+      display icons/categories/colors, sync your links across browsers signed in to the same Google
+      Account (if Chrome Sync is on), and create or restore backups you request. No advertising,
+      profiling, behavioral analytics, model training, creditworthiness, or any unrelated purpose.
+    </p>
+
+    <h2>4. What the extension does not do</h2>
+    <ul>
+      <li>It does not read your browsing history, background tabs, forms, passwords, or pages you did
+        not save.</li>
+      <li>It does not inject scripts into or modify the sites you visit.</li>
+      <li>It does not send data to developer servers — none exist.</li>
+      <li>It uses no analytics, tracking pixels, tracking cookies, or advertising identifiers.</li>
+      <li>It does not sell, rent, or transfer data to advertisers, data brokers, or information
+        resellers.</li>
+      <li>It does not load or execute remote code; all JavaScript ships inside the extension package.</li>
+    </ul>
+
+    <h2>5. Storage and sync</h2>
+    <p>
+      Link records live in <code>chrome.storage.sync</code>, which Chrome syncs to your Google Account
+      when sync is enabled; that traffic is operated by Google under the
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>,
+      and the developer has no access to it. Icons, discovered icon URLs, and appearance settings live in
+      <code>chrome.storage.local</code> on your device and are not synced. If sync is unavailable, links
+      are stored locally only. You can turn off Chrome Sync at any time without losing links already
+      saved on the device.
+    </p>
+
+    <h2>6. Network connections</h2>
+    <p>
+      There is no connection to the developer or to third-party data services. The only connections are:
+      direct requests to the saved site itself (HTML and optional manifest, sent without cookies,
+      <code>credentials: "omit"</code>, discarded after reading); Chrome's local favicon cache
+      (<code>chrome://favicon</code>); and, only when the files are opened outside the installed
+      extension, Google's public favicon service. As with any web request, the visited site sees normal
+      technical information such as your IP address, browser type, and time of access.
+    </p>
+
+    <h2>7. Sharing</h2>
+    <p>
+      The developer does not share, sell, or transfer your data because it never reaches the developer.
+      The only third parties involved are Google (Chrome Sync, under its own policy) and the sites you
+      saved (which receive the icon-discovery request described above).
+    </p>
+
+    <h2>8. Retention and deletion</h2>
+    <p>
+      Data is kept only while the corresponding link exists in the installed extension. Delete a link via
+      its context menu (“Excluir link”); reset appearance settings in the “Personalizar” dialog;
+      uninstalling the extension removes its local and synced data from Chrome. Backups you exported
+      remain on your computer. You can also manage extension sync data in your Google Account settings.
+      The developer keeps no copy.
+    </p>
+
+    <h2>9. Security</h2>
+    <p>
+      Data stays under Chrome's extension storage isolation and security model. Sync, when enabled, is
+      performed by Google over encrypted connections. Because nothing is transmitted to the developer,
+      there is no developer-side database to breach. Keep Chrome updated and protect your Google Account
+      with two-step verification.
+    </p>
+
+    <h2>10. Children</h2>
+    <p>
+      The extension is not directed to children under 13 and does not knowingly collect data from
+      children. The developer collects no data at all.
+    </p>
+
+    <h2>11. Your rights</h2>
+    <p>
+      Since the developer holds no personal data on its own servers, there is no developer-side database
+      to access, correct, port, or erase. You control the data directly inside the extension (view, edit,
+      export, delete) and through your Google Account. For privacy questions or rights under the LGPD,
+      GDPR, or similar laws, contact us at the address below.
+    </p>
+
+    <h2>12. Changes</h2>
+    <p>
+      If data practices change, this page and its “Last updated” date will be revised, and material
+      changes will be announced in the Chrome Web Store listing and, where required, inside the product
+      before the new practice takes effect. The version at this URL is always the current one.
+    </p>
+
+    <h2>13. Contact</h2>
+    <p class="contact">
+      Responsible: <strong>Amanda Oliveira de Lima</strong><br />
+      Email: <a href="mailto:amandaoliveiradelima@gmail.com">amandaoliveiradelima@gmail.com</a>
+    </p>
+
+    <h2>14. Limited Use statement</h2>
+    <div class="box">
+      <p>
+        “The use of information received from Google APIs will adhere to the Chrome Web Store User Data
+        Policy, including the Limited Use requirements.”
+      </p>
+    </div>
+
+    <footer>
+      Meu Painel is an independent extension, not affiliated with Google. Google Chrome is a trademark of
+      Google LLC. This page uses no cookies, external fonts, scripts, or third-party resources.
+    </footer>
+  </section>
+
+</main>
+</body>
+</html>
